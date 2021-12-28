@@ -2,7 +2,7 @@ import React from "react";
 import _ from "lodash";
 
 function Pagination({ count, pageSize, currentPage, onPageChange }) {
-  const pageRange = Math.floor(count / pageSize);
+  const pageRange = Math.ceil(count / pageSize);
   const pages = _.range(1, pageRange + 1);
 
   return (

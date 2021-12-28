@@ -6,8 +6,9 @@ import AddPost from "./components/AddPost";
 import Pagination from "./common/Pagination";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "./App.css";
 import { paginate } from "./utils/paginate";
+import "./App.css";
+
 function App() {
   const [posts, setPosts] = useState([]);
   const [pageSize, setPageSize] = useState(10);
