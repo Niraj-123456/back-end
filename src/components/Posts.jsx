@@ -1,6 +1,7 @@
 import React from "react";
 
-function Posts({ posts, doUpdate, doDelete }) {
+function Posts({ data, doUpdate, doDelete }) {
+  console.log(data);
   return (
     <div className="container" style={{ marginTop: "50px" }}>
       <div className="row justify-content-center">
@@ -14,7 +15,7 @@ function Posts({ posts, doUpdate, doDelete }) {
               </tr>
             </thead>
             <tbody>
-              {posts.map((post) => (
+              {data.map((post) => (
                 <tr key={post.id}>
                   <td>{post.title}</td>
                   <td>{post.body}</td>

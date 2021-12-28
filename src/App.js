@@ -11,21 +11,24 @@ import { paginate } from "./utils/paginate";
 function App() {
   const [posts, setPosts] = useState([]);
   const [pageSize, setPageSize] = useState(10);
-  const { length: count } = posts;
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
         const { data: results } = await http.get(config.apiURL);
-        const res = paginate(results, currentPage, pageSize);
-        setPosts(res);
+        setPosts(results);
       } catch (err) {
         console.log(err);
       }
     };
     fetchPosts();
   }, []);
+
+  const pagination = () => {
+    const pagedData = paginate(posts, currentPage, pageSize);
+    return pagedData;
+  };
 
   const handleAdd = async () => {
     const obj = { title: "abc", body: "This is body." };
@@ -69,16 +72,18 @@ function App() {
     setCurrentPage(page);
   };
 
+  const data = pagination();
+
   return (
     <div className="App">
       <ToastContainer />
       <AddPost doAdd={handleAdd} />
-      <Posts posts={posts} doUpdate={handleUpdate} doDelete={handleDelete} />
+      <Posts data={data} doUpdate={handleUpdate} doDelete={handleDelete} />
       <Pagination
-        count={count}
+        count={posts.length}
         pageSize={pageSize}
-        onPageChange={handlePageChange}
         currentPage={currentPage}
+        onPageChange={handlePageChange}
       />
     </div>
   );
